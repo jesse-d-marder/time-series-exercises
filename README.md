@@ -1,0 +1,1 @@
+### This repository contains my code completed as part of the time series curriculum with Codeup.
