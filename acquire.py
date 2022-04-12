@@ -85,15 +85,21 @@ def acquire_sales():
         response = requests.get(url)
         data = response.json()
 
+        # Get initial data from page 1
         sales_list.extend(data['payload']['sales'])
 
         for page in range(data['payload']['max_page']-1):
             print("Checking page: " , page, "of ", data['payload']['max_page'])
+
             url = domain + data['payload']['next_page']
             response = requests.get(url)
+            print("Downloading ", url)
             data = response.json()
+            print(len(data['payload']['sales']), "Number of Records for this page")
 
-            stores_list.extend(data['payload']['sales'])
+            sales_list.extend(data['payload']['sales'])
+
+            print("Records saved: ", len(sales_list))
 
         sales = pd.DataFrame(sales_list)
 
