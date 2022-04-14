@@ -38,6 +38,8 @@ def prepare_power(df):
     df['month'] = df.index.month
     df['year'] = df.index.year
     
+    df.columns = [col.replace('+','_').lower() for col in df.columns]
+    
     # Fill in null values with 0 - mostly from early years presumably when no alternative energy?
     df = df.fillna(0)
     
